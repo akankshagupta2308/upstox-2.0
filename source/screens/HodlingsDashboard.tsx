@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
+  RefreshControl,
   StatusBar,
   StyleSheet,
   Text,
@@ -14,9 +15,9 @@ import { useGetUserHoldings } from "../hooks/useGetUserHoldings";
 import EmptyListView from "../components/EmptyListView";
 
 const HodlingsDashboard = () => {
-  const { holdings, isLoading, error } = useGetUserHoldings();
+  const { holdings, isLoading, error, reload } = useGetUserHoldings();
 
-  if (isLoading) {
+  if (isLoading && !holdings.length) {
     return (
       <View style={styles.loaderContainer}>
         <ActivityIndicator size={24} color={"#691883"} />
@@ -48,6 +49,9 @@ const HodlingsDashboard = () => {
         maxToRenderPerBatch={20}
         keyExtractor={(item) => item.symbol}
         ListEmptyComponent={<EmptyListView />}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={reload} />
+        }
       />
       {!!holdings.length ? (
         <ProfitAndLossExpandableCard data={holdings} />

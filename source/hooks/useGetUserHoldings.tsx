@@ -12,6 +12,10 @@ export const useGetUserHoldings = () => {
     fetchUserHoldings();
   }, []);
 
+  const reload = () => {
+    fetchUserHoldings();
+  };
+
   const fetchUserHoldings = async () => {
     setIsLoaidng(true);
     setError(false);
@@ -26,5 +30,5 @@ export const useGetUserHoldings = () => {
     setIsLoaidng(false);
   };
 
-  return { isLoading, holdings, error };
+  return { isLoading, holdings, error, reload };
 };
