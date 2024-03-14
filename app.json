@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "upstox-lite",
+    "slug": "upstox-lite",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "upstox-lite"
+}
